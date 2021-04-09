@@ -94,7 +94,17 @@ function viewRole() {
 }
 
 function viewEmployee() {
-    const sql = "SELECT * FROM employees";
+    const sql = `SELECT employees.id, 
+                employees.first_name, 
+                employees.last_name, 
+                roles.title, 
+                departments.name AS 'department', 
+                roles.salary,
+                employees.manager_id
+                FROM employees, roles, departments 
+                WHERE departments.id = roles.department_id 
+                AND roles.id = employees.role_id
+                ORDER BY employees.id ASC`;
     connection.query(sql, (err, res) => {
         if (err) throw err;
         console.table(res);
