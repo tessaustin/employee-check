@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
+const { response } = require('express');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -200,13 +201,15 @@ function addEmployee() {
 
 ///////Update Function///////
 function updateRole() {
-    const sql = "SELECT id, first_name, last_name, role_id  FROM employees";
+    /* const sql = /* "SELECT id, first_name, last_name, role_id  FROM employees"; */ 
+    const sql = "SELECT * FROM employees";
     connection.query(sql, (err, res) => {
         if (err) throw err;
-        console.table(res);
+/*         console.table(res); */
         let employeeNamesArr = [];
         res.forEach((employees) => {
             employeeNamesArr.push(`${employees.first_name} ${employees.last_name}`);
+            /* employeeNamesArr.push(`${employees.id}`); */
         });
 
         let sql = `SELECT roles.id, roles.title FROM roles`;
@@ -231,6 +234,7 @@ function updateRole() {
                     }
                 ])
                 .then((res) => {
+                    console.log(res);
                     const sql = `UPDATE employees SET employees.role_id = ? WHERE employees.id = ?`;
                     let update = [res.pickEmployee, res.pickRole];
                     connection.query(sql, update, (err, res) => {

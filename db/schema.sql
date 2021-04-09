@@ -23,5 +23,9 @@ CREATE TABLE employees (
     role_id INTEGER NOT NULL,
     manager_id INTEGER DEFAULT NULL,
     PRIMARY KEY (id)
+    CONSTRAINT fk_role
+    FOREIGN KEY (role_id)
+    REFERENCES roles(id)
+    ON DELETE SET NULL
 
 );
