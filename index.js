@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Connect to database
-const db = mysql.createConnection(
+const connection = mysql.createConnection(
     {
         host: 'localhost',
         // Your MySQL username,
@@ -77,7 +77,7 @@ function start() {
 ///////Functions to view///////
 function viewDepartment() {
     const sql = "SELECT * FROM departments";
-    connection.promise().query(sql, (err, res) => {
+    connection.query(sql, (err, res) => {
         if (err) throw err;
         console.table(res);
         start();
@@ -86,7 +86,7 @@ function viewDepartment() {
 
 function viewRole() {
     const sql = "SELECT * FROM roles";
-    connection.promise().query(sql, (err, res) => {
+    connection.query(sql, (err, res) => {
         if (err) throw err;
         console.table(res);
         start();
@@ -95,7 +95,7 @@ function viewRole() {
 
 function viewEmployee() {
     const sql = "SELECT * FROM employees";
-    connection.promise().query(sql, (err, res) => {
+    connection.query(sql, (err, res) => {
         if (err) throw err;
         console.table(res);
         start();
@@ -207,14 +207,6 @@ function updateRole() {
         }
     });
 }
-
-
-
-
-
-
-
-
 
 
 
