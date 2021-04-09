@@ -75,7 +75,7 @@ function start() {
 
 ///////Functions to view///////
 function viewDepartment() {
-    const query = "SELECT * FROM department";
+    const query = "SELECT * FROM departments";
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
@@ -84,7 +84,7 @@ function viewDepartment() {
 }
 
 function viewRole() {
-    const query = "SELECT * FROM role";
+    const query = "SELECT * FROM roles";
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
@@ -93,7 +93,7 @@ function viewRole() {
 }
 
 function viewEmployee() {
-    const query = "SELECT * FROM employee";
+    const query = "SELECT * FROM employees";
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);

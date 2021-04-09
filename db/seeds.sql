@@ -1,6 +1,6 @@
 USE employee;
 
-INSERT INTO department
+INSERT INTO departments
     (name)
 VALUES
     ("Human Resources"),
@@ -9,7 +9,7 @@ VALUES
     ("Food Services"),
     ("Retail");
 
-INSERT INTO role
+INSERT INTO roles
     (title, salary, department_id)
 VALUES  
     ("recruiter", 45000, 1),
@@ -22,3 +22,13 @@ VALUES
     ("Supervisor", 58000, 3),
     ("Manager", 32000, 2),
     ("Compensation", 38000, 1);
+
+INSERT INTO employees
+    (first_name, last_name, role_id, manager_id)
+VALUES
+    ("Rachel", "Green", 5, 1),
+    ("Phoebe", "Buffay", 2, 1),
+    ("Chandler", "Bing", 3, 2),
+    ("Ross", "Geller", 1, 1),
+    ("Monica", "Geller", 4, 2),
+    ("Joey", "Tribbiani", 4, 2);
