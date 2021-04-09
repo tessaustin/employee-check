@@ -15,7 +15,7 @@ VALUES
     ("recruiter", 45000, 1),
     ("Lift Operator", 25000, 2),
     ("Ski Patrol", 35000, 3),
-    ("Chef", 30000, 4),
+    ("Head Chef", 30000, 4),
     ("Manager", 40000, 5),
     ("Cook", 28000, 4),
     ("Cashier", 21000, 5),

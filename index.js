@@ -204,19 +204,21 @@ function updateRole() {
     /* const sql = /* "SELECT id, first_name, last_name, role_id  FROM employees"; */ 
     const sql = "SELECT * FROM employees";
     connection.query(sql, (err, res) => {
+        console.table(res);
         if (err) throw err;
 /*         console.table(res); */
         let employeeNamesArr = [];
         res.forEach((employees) => {
-            employeeNamesArr.push(`${employees.first_name} ${employees.last_name}`);
-            /* employeeNamesArr.push(`${employees.id}`); */
+            /* employeeNamesArr.push(`${employees.first_name} ${employees.last_name}`); */
+            employeeNamesArr.push(`${employees.id}`);
         });
 
         let sql = `SELECT roles.id, roles.title FROM roles`;
         connection.query(sql, (error, res) => {
+            console.table(res);
             if (error) throw error;
             let rolesArr = [];
-            res.forEach((role) => { rolesArr.push(role.title); });
+            res.forEach((role) => { rolesArr.push(role.id); });
 
             inquirer
                 .prompt([
