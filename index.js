@@ -191,7 +191,22 @@ function addEmployee() {
         });
 }
 
-///////Functions update///////
+///////Update Function///////
+function updateRole() {
+    const sql = "SELECT id, first_name, last_name, role_id  FROM employee";
+    connection.promise().query(sql, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        {
+            inquirer
+                .prompt({
+                    type: "input",
+                    message: "Update employee:",
+                    name: "employee"
+                });
+        }
+    });
+}
 
 
 
