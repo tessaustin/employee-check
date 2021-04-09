@@ -121,9 +121,10 @@ function addDepartment() {
             name: "newDepartment"
         })
         .then((res) => {
-            /* const departments = res.department; */
+           /*  const departments = res.department; */
             const sql = `INSERT INTO departments (name) VALUES (?)`;
             connection.promise().query(sql, res.newDepartment, (err, res) => {
+                console.log(`Department successfully created!`);
                 if (err) throw err;
                 console.table(res);
                 viewDepartment();
