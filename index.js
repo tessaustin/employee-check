@@ -138,7 +138,7 @@ function addRole() {
             {
                 type: "input",
                 message: "What job title are you adding?",
-                name: "title"
+                name: "newRole"
             },
             {
                 type: "input",
@@ -152,14 +152,16 @@ function addRole() {
             }
         ])
         .then((res) => {
-            const title = res.title;
+     /*        const title = res.newRole;
             const salary = res.salary;
-            const departmentID = res.departmentID;
-            const sql = `INSERT INTO role (title, salary, department_id) VALUE("${title}", "${salary}", "${departmentID}")`;
-            connection.query(sql, (err, res) => {
+            const departmentID = res.departmentID; */
+            const sql = `INSERT INTO roles (title, salary, department_id) VALUE(?,?,?)`;
+            let info = [res.newRole, res.salary, res.departmentID];
+            connection.query(sql, info, (err, res) => {
+                console.log(`Role successfully created!`);
                 if (err) throw err;
                 console.table(res);
-                start();
+                viewRole();
             });
         });
 }
