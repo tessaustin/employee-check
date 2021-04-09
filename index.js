@@ -121,7 +121,6 @@ function addDepartment() {
             name: "newDepartment"
         })
         .then((res) => {
-           /*  const departments = res.department; */
             const sql = `INSERT INTO departments (name) VALUES (?)`;
             connection.query(sql, res.newDepartment, (err, res) => {
                 console.log(`Department successfully created!`);
@@ -152,9 +151,6 @@ function addRole() {
             }
         ])
         .then((res) => {
-     /*        const title = res.newRole;
-            const salary = res.salary;
-            const departmentID = res.departmentID; */
             const sql = `INSERT INTO roles (title, salary, department_id) VALUE(?,?,?)`;
             let info = [res.newRole, res.salary, res.departmentID];
             connection.query(sql, info, (err, res) => {
@@ -191,15 +187,16 @@ function addEmployee() {
             }
         ])
         .then((res) => {
-            const firstName = res.firstName;
+/*             const firstName = res.firstName;
             const lastName = res.lastName;
             const roleID = res.roleID;
-            const managerID = res.managerID;
-            const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE("${firstName}", "${lastName}", "${roleID}", "${managerID}")`;
-            connection.query(sql, (err, res) => {
+            const managerID = res.managerID; */
+            const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUE(?,?,?,?)`;
+            let infoTwo = [res.firstName, res.lastName, res.roleID, res.managerID];
+            connection.query(sql, infoTwo, (err, res) => {
                 if (err) throw err;
                 console.table(res);
-                start();
+                viewEmployee();
             });
         });
 }
