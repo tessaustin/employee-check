@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS employee;
+CREATE DATABASE employee;
+USE employee;
+
 CREATE TABLE department (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,

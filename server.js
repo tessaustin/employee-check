@@ -25,7 +25,6 @@ const db = mysql.createConnection(
 start();
 
 ///////Functions///////
-
 function start() {
     inquirer
         .prompt({
@@ -72,6 +71,34 @@ function start() {
                     break;
             }
         });
+}
+
+///////Functions to view///////
+function viewDepartment() {
+    const query = "SELECT * FROM department";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        start();
+    });
+}
+
+function viewRole() {
+    const query = "SELECT * FROM role";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        start();
+    });
+}
+
+function viewEmployee() {
+    const query = "SELECT * FROM employee";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        start();
+    });
 }
 
 
