@@ -113,7 +113,7 @@ function addDepartment() {
         .then((res) => {
             const departments = res.department;
             const sql = `INSERT INTO department (name) VALUES("${departments}")`;
-            connection.promise().query(sql, (err, res) => {
+            connection.query(sql, (err, res) => {
                 if (err) throw err;
                 console.table(res);
                 start();
@@ -145,7 +145,7 @@ function addRole() {
             const salary = res.salary;
             const departmentID = res.departmentID;
             const sql = `INSERT INTO role (title, salary, department_id) VALUE("${title}", "${salary}", "${departmentID}")`;
-            connection.promise().query(sql, (err, res) => {
+            connection.query(sql, (err, res) => {
                 if (err) throw err;
                 console.table(res);
                 start();
@@ -183,7 +183,7 @@ function addEmployee() {
             const roleID = res.roleID;
             const managerID = res.managerID;
             const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE("${firstName}", "${lastName}", "${roleID}", "${managerID}")`;
-            connection.promise().query(sql, (err, res) => {
+            connection.query(sql, (err, res) => {
                 if (err) throw err;
                 console.table(res);
                 start();
