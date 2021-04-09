@@ -187,13 +187,10 @@ function addEmployee() {
             }
         ])
         .then((res) => {
-/*             const firstName = res.firstName;
-            const lastName = res.lastName;
-            const roleID = res.roleID;
-            const managerID = res.managerID; */
             const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUE(?,?,?,?)`;
             let infoTwo = [res.firstName, res.lastName, res.roleID, res.managerID];
             connection.query(sql, infoTwo, (err, res) => {
+                console.log(`Employee successfully created!`);
                 if (err) throw err;
                 console.table(res);
                 viewEmployee();
@@ -203,28 +200,46 @@ function addEmployee() {
 
 ///////Update Function///////
 function updateRole() {
-    const sql = "SELECT id, first_name, last_name, role_id  FROM employee";
-    connection.promise().query(sql, (err, res) => {
+    const sql = "SELECT id, first_name, last_name, role_id  FROM employees";
+    connection.query(sql, (err, res) => {
         if (err) throw err;
         console.table(res);
-        {
+        let employeeNamesArr = [];
+        res.forEach((employees) => {
+            employeeNamesArr.push(`${employees.first_name} ${employees.last_name}`);
+        });
+
+        let sql = `SELECT roles.id, roles.title FROM roles`;
+        connection.query(sql, (error, res) => {
+            if (error) throw error;
+            let rolesArr = [];
+            res.forEach((role) => { rolesArr.push(role.title); });
+
             inquirer
-                .prompt({
-                    type: "input",
-                    message: "Update employee:",
-                    name: "employee"
+                .prompt([
+                    {
+                        type: "list",
+                        message: "Update employee:",
+                        name: "pickEmployee",
+                        choices: employeeNamesArr
+                    },
+                    {
+                        type: "list",
+                        message: "New role:",
+                        name: "pickRole",
+                        choices: rolesArr
+                    }
+                ])
+                .then((res) => {
+                    const sql = `UPDATE employees SET employees.role_id = ? WHERE employees.id = ?`;
+                    let update = [res.pickEmployee, res.pickRole];
+                    connection.query(sql, update, (err, res) => {
+                        console.log(`Employee successfully updated!`);
+                        if (err) throw err;
+                        console.table(res);
+                        viewEmployee();
+                    })
                 });
-        }
+        });
     });
 }
-
-
-
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-    res.status(404).end();
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
