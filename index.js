@@ -118,18 +118,18 @@ function addDepartment() {
         .prompt({
             type: "input",
             message: " What department would you like to add?",
-            name: "departments"
+            name: "newDepartment"
         })
         .then((res) => {
-            const departments = res.department;
-            const sql = `INSERT INTO department (name) VALUES("${departments}")`;
-            connection.query(sql, (err, res) => {
+            /* const departments = res.department; */
+            const sql = `INSERT INTO departments (name) VALUES (?)`;
+            connection.promise().query(sql, res.newDepartment, (err, res) => {
                 if (err) throw err;
                 console.table(res);
-                start();
+                viewDepartment();
             });
         });
-}
+};
 
 function addRole() {
     inquirer
